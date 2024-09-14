@@ -44,6 +44,8 @@ namespace Payroll.Infrastructure.Repositories
             return await _context.Employees.ToListAsync();
         }
 
+
+
         public async Task<Employee> GetByIdAsync(int id)
         {
             var employee = await _context.Employees.FindAsync(id);
@@ -56,7 +58,7 @@ namespace Payroll.Infrastructure.Repositories
 
         public async Task<Employee> UpdateAsync(Employee entity)
         {
-            var updateEmployee = await _context.Employees.AsNoTracking().FirstOrDefaultAsync(x=>x.Id == entity.Id);
+            var updateEmployee = await _context.Employees.AsNoTracking().FirstOrDefaultAsync(x => x.Id == entity.Id);
             if (updateEmployee != null)
             {
                 updateEmployee.TC = entity.TC;

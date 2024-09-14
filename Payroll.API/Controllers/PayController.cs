@@ -26,6 +26,13 @@ namespace Payroll.API.Controllers
             return Ok(pays);
         }
 
+        [HttpGet("GetAllEmployeePays")]
+        public async Task<ActionResult<IEnumerable<Pay>>> GetAllEmployeePays()
+        {
+            var pays = await _payService.GetAllEmployeePaysAsync();
+            return Ok(pays);
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Pay>> GePayById(int id)
         {

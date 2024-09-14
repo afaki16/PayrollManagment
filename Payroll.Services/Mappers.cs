@@ -24,6 +24,7 @@ namespace Payroll.Services
             Mapper.Register<Pay, CreatePayDto>();
             Mapper.Register<Pay, UpdatePayDto>();
             Mapper.Register<Pay, PayDto>();
+            Mapper.Register<Pay, EmployeesPaysDto>();
             Mapper.Register<PayDetail, PayDetailDto>();
                
         }

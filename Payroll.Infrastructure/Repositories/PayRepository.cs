@@ -4,6 +4,7 @@ using Payroll.Domain.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,22 +25,6 @@ namespace Payroll.Infrastructure.Repositories
             await _context.SaveChangesAsync();
             return result.Entity;
         }
-
-        public Task DeleteAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<Pay>> GetAllAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Pay> GetByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<Pay> UpdateAsync(Pay entity)
         {
             var updatePay = await _context.Pays.AsNoTracking().FirstOrDefaultAsync(x => x.Id == entity.Id);
@@ -59,5 +44,29 @@ namespace Payroll.Infrastructure.Repositories
                 throw new KeyNotFoundException("Pay not found");
             }
         }
+
+        public Task DeleteAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<Pay>> GetAllAsync()
+        {
+            return await _context.Pays.ToListAsync();
+        }
+
+        public Task<Pay> GetByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<Pay>> GetAllEmployeePays()
+        {
+            return await _context.Pays.Include(x => x.Employee).ToListAsync();
+        }
+
+       
+
+        
     }
 }

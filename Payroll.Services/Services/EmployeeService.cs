@@ -21,16 +21,6 @@ namespace Payroll.Services.Services
             _employeeRepository = employeeRepository;
         }
 
-        public async Task<IEnumerable<Employee>> GetAllEmployeesAsync()
-        {
-            return await _employeeRepository.GetAllAsync();
-        }
-
-        public async Task<Employee> GetEmployeeByIdAsync(int id)
-        {
-            return await _employeeRepository.GetByIdAsync(id);
-        }
-
         public async Task<Employee> AddEmployeeAsync(CreateEmployeeDto employee)
         {
             var newEmployee = Mapper.Map<CreateEmployeeDto, Employee>(employee);
@@ -49,6 +39,18 @@ namespace Payroll.Services.Services
         {
             await _employeeRepository.DeleteAsync(id);
         }
+
+        public async Task<IEnumerable<Employee>> GetAllEmployeesAsync()
+        {
+            return await _employeeRepository.GetAllAsync();
+        }
+        
+        public async Task<Employee> GetEmployeeByIdAsync(int id)
+        {
+            return await _employeeRepository.GetByIdAsync(id);
+        }
+
+       
 
       
     }

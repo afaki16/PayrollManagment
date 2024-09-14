@@ -9,5 +9,6 @@ namespace Payroll.Domain.Repositories
 {
     public interface IPayRepository :IRepository<Pay>
     {
+        Task<IEnumerable<Pay>> GetAllEmployeePays();
     }
 }
