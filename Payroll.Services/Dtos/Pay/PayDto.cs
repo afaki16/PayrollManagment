@@ -14,11 +14,11 @@ namespace Payroll.Services.Dtos.Pay
     public sealed record PayDto
     {
        
-        public int Id { get; set; }
-        public SalaryType SalaryType { get; set; }
-        public decimal Salary { get; set; }
-        public Guid EmployeeId { get; set; }
-        public DateTime Date { get; set; }
-        public  List<PayDetailDto> PayDetails { get; set; }
+        public int Id { get; init; }
+        public SalaryType SalaryType { get; init; }
+        public decimal Salary { get; init; }
+        public Guid EmployeeId { get; init; }
+        public DateTime Date { get; init; }
+        public  List<PayDetailDto> PayDetails { get; init; }
     }
 }

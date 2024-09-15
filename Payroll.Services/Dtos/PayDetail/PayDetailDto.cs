@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Payroll.Services.Dtos.PayDetail
 {
-    public class PayDetailDto
+    public sealed record PayDetailDto
     {
-        public int Id { get; set; }
-        public decimal Count { get; set; }
-        public decimal Price { get; set; }
-        public int PayId { get; set; }
+        public int Id { get; init; }
+        public decimal Count { get; init; }
+        public decimal Price { get; init; }
+        public int PayId { get; init; }
     }
 }

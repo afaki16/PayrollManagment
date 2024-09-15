@@ -11,17 +11,17 @@ using Payroll.Services.Dtos.PayDetail;
 
 namespace Payroll.Services.Dtos.Pay
 {
-    public class CreatePayDto
+    public sealed record CreatePayDto
     {
        
-        public SalaryType SalaryType { get; set; }
+        public SalaryType SalaryType { get; init; }
 
-        public decimal Salary { get; set; }
+        public decimal Salary { get; init; }
        
-        public Guid EmployeeId { get; set; }
+        public Guid EmployeeId { get; init; }
        
-        public DateTime Date { get; set; }
+        public DateTime Date { get; init; }
 
-        public List<CreatePayDetailDto> PayDetails { get; set; }
+        public List<CreatePayDetailDto> PayDetails { get; init; }
     }
 }

@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace Payroll.Services.Dtos.Employees
 {
-    public class EmployeeDto
+    public sealed record EmployeeDto
     {
-        public Guid Id { get; set; }
-        public string TC { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
-        public List<PayDto> Pays { get; set; }
+        public Guid Id { get; init; }
+        public string TC { get; init; }
+        public string Name { get; init; }
+        public string Surname { get; init; }
+        public List<PayDto> Pays { get; init; }
     }
 }
 

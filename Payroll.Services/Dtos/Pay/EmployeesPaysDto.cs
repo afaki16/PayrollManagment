@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace Payroll.Services.Dtos.Pay
 {
-    public class EmployeesPaysDto
+    public sealed record EmployeesPaysDto
     {
-        public Guid Id { get; set; }
-        public string TC { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
-        public decimal Salary { get; set; }
-        public SalaryType SalaryType { get; set; }
-        public DateTime Date { get; set; }
+        public Guid Id { get; init; }
+        public string TC { get; init; }
+        public string Name { get; init; }
+        public string Surname { get; init; }
+        public decimal Salary { get; init; }
+        public SalaryType SalaryType { get; init; }
+        public DateTime Date { get; init; }
     }
 }

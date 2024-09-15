@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Payroll.Services.Dtos.PayDetail
 {
-    public class CreatePayDetailDto
+    public sealed record CreatePayDetailDto
     {
-        public decimal Count { get; set; }
+        public decimal Count { get; init; }
 
-        public decimal Price { get; set; }
+        public decimal Price { get; init; }
       
     }
 }
