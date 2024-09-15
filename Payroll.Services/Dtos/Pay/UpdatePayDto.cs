@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace Payroll.Services.Dtos.Pay
 {
-    public sealed record UpdatePayDto
+    public class UpdatePayDto
     {
-        public int Id { get; init; }
-        public SalaryType SalaryType { get; init; }
+        public int Id { get; set; }
+        public SalaryType SalaryType { get; set; }
 
-        public decimal Salary { get; init; }
+        public decimal Salary { get; set; }
 
-        public Guid EmployeeId { get; init; }
+        public Guid EmployeeId { get; set; }
 
-        public DateTime Date { get; init; }
+        public DateTime Date { get; set; }
 
-        public List<CreatePayDetailDto> PayDetails { get; init; }
+        public List<CreatePayDetailDto> PayDetails { get; set; }
     }
 }
