@@ -25,59 +25,76 @@ namespace Payroll.API.Controllers
             [HttpGet]
             public async Task<ActionResult<IEnumerable<Employee>>> GetAllEmployees()
             {
-                var employees = await _employeeService.GetAllEmployeesAsync();
-                return Ok(employees);
+            var employees = await _employeeService.GetAllEmployeesAsync();
+
+            if (employees == null || !employees.Any())
+            {
+                return NoContent(); 
             }
 
+            return Ok(employees);
+        }
+
             [HttpGet("{id}")]
-            public async Task<ActionResult<Employee>> GetEmployeeById(int id)
+            public async Task<ActionResult<Employee>> GetEmployeeById(Guid id)
             {
-                try
+            try
+            {
+                var employee = await _employeeService.GetEmployeeByIdAsync(id);
+
+                if (employee == null)
                 {
-                    var employee = await _employeeService.GetEmployeeByIdAsync(id);
-                    return Ok(employee);
+                    return NotFound(new { Message = $"Employee with ID {id} not found" }); 
                 }
-                catch (KeyNotFoundException)
-                {
-                    return NotFound();
-                }
+
+                return Ok(employee); 
             }
+            catch (KeyNotFoundException)
+            {
+                return NotFound(new { Message = $"Employee with ID {id} not found" }); 
+            }
+        }
 
             [HttpPost]
             public async Task<ActionResult> AddEmployee(CreateEmployeeDto employee)
             {
-               var result = await _employeeService.AddEmployeeAsync(employee);
-                 
-                return Ok(result);
+                var result = await _employeeService.AddEmployeeAsync(employee);
+
+            if (result != null)
+            {
+                return CreatedAtAction(nameof(GetEmployeeById), new { id = result.Id }, result); 
+            }
+
+            return BadRequest(new { Message = "Failed to add employee" });
             }
 
             [HttpPut()]
             public async Task<ActionResult> UpdateEmployee(UpdateEmployeeDto employee)
             {
-                try
-                {
-                    await _employeeService.UpdateEmployeeAsync(employee);
-                    return NoContent();
-                }
-                catch (KeyNotFoundException)
-                {
-                    return NotFound();
-                }
+            try
+            {
+                await _employeeService.UpdateEmployeeAsync(employee);
+                return Ok(new { Message = "Employee updated successfully" }); 
             }
+            catch (KeyNotFoundException)
+            {
+                return NotFound(new { Message = $"Employee with ID {employee.Id} not found" }); 
+            }
+        }
 
             [HttpDelete("{id}")]
-            public async Task<ActionResult> DeleteEmployee(int id)
+            public async Task<ActionResult> DeleteEmployee(Guid id)
             {
-                try
-                {
-                    await _employeeService.DeleteEmployeeAsync(id);
-                    return NoContent();
-                }
-                catch (KeyNotFoundException)
-                {
-                    return NotFound();
-                }
+            try
+            {
+                await _employeeService.DeleteEmployeeAsync(id);
+                return Ok(new { Message = $"Employee with ID {id} deleted successfully" }); 
             }
+            catch (KeyNotFoundException)
+            {
+                return NotFound(new { Message = $"Employee with ID {id} not found" }); 
+            }
+        }
         }
     }
 

@@ -9,6 +9,8 @@ namespace Payroll.Domain.Repositories
 {
     public interface IPayRepository :IRepository<Pay>
     {
+        Task DeleteAsync(int id);
+        Task<Pay> GetByIdAsync(int id);
         Task<IEnumerable<Pay>> GetAllEmployeePays();
     }
 }

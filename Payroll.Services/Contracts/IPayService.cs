@@ -12,7 +12,7 @@ namespace Payroll.Services.Contracts
     {
         Task<IEnumerable<Pay>> GetAllPayAsync();
         Task<IEnumerable<EmployeesPaysDto>> GetAllEmployeePaysAsync();
-        Task<PayDto> GetPayByIdAsync(int id);
+        Task<Pay> GetPayByIdAsync(int id);
         Task<PayDto> AddPayAsync(CreatePayDto pay);
         Task<PayDto> UpdatePayAsync(UpdatePayDto pay);
         Task DeletePayAsync(int id);

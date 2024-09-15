@@ -45,19 +45,33 @@ namespace Payroll.Infrastructure.Repositories
             }
         }
 
-        public Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
-        }
+            var pay = await _context.Pays.FindAsync(id);
+            if (pay != null)
+            {
+                _context.Pays.Remove(pay);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                throw new KeyNotFoundException("Employee not found");
+            }
 
+        }
         public async Task<IEnumerable<Pay>> GetAllAsync()
         {
             return await _context.Pays.ToListAsync();
         }
 
-        public Task<Pay> GetByIdAsync(int id)
+        public async Task<Pay> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var pay = await _context.Pays.FindAsync(id);
+            if (pay == null)
+            {
+                throw new KeyNotFoundException("Employee not found");
+            }
+            return pay;
         }
 
         public async Task<IEnumerable<Pay>> GetAllEmployeePays()

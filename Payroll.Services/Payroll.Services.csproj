@@ -14,8 +14,4 @@
     <ProjectReference Include="..\Payroll.Domain\Payroll.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="NewFolder\" />
-  </ItemGroup>
-
 </Project>

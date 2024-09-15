@@ -44,14 +44,23 @@ namespace Payroll.Services.Services
 
         public async Task<PayDto> UpdatePayAsync(UpdatePayDto pay)
         {
+            if (pay.SalaryType == SalaryType.Overtime)
+            {
+                pay.Salary += pay.PayDetails.FirstOrDefault().Count * pay.PayDetails.FirstOrDefault().Price;
+            }
+            else if (pay.SalaryType == SalaryType.DailyWage)
+            {
+                pay.Salary = pay.PayDetails.FirstOrDefault().Count * pay.PayDetails.FirstOrDefault().Price;
+            }
+
             var updatePay = Mapper.Map<UpdatePayDto, Pay>(pay);
             var result = await _payRepository.UpdateAsync(updatePay);
             return Mapper.Map<Pay, PayDto>(result);
         }
 
-        public Task DeletePayAsync(int id)
+        public async Task DeletePayAsync(int id)
         {
-            throw new NotImplementedException();
+            await _payRepository.DeleteAsync(id);
         }
 
         public async Task<IEnumerable<Pay>> GetAllPayAsync()
@@ -80,9 +89,9 @@ namespace Payroll.Services.Services
             return employeesPays;
         }
 
-        public Task<PayDto> GetPayByIdAsync(int id)
+        public async Task<Pay> GetPayByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _payRepository.GetByIdAsync(id);
         }
 
         public decimal CalculateSalaray(List<Pay> listPay)
@@ -91,8 +100,6 @@ namespace Payroll.Services.Services
             return listPay.Where(x => x.SalaryType == SalaryType.FixedSalary).Sum(x => x.Salary)
                 + listPay.Where(x => x.SalaryType == SalaryType.DailyWage).Sum(x => x.Salary = x.PayDetails.Sum(y => y.Price * y.Count));
         }
-
-        
 
        
     }

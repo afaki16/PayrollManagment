@@ -24,38 +24,6 @@ namespace Payroll.Infrastructure.Repositories
             await _context.SaveChangesAsync();
             return result.Entity;
         }
-
-        public async Task DeleteAsync(int id)
-        {
-            var employee = await _context.Employees.FindAsync(id);
-            if (employee != null)
-            {
-                _context.Employees.Remove(employee);
-                await _context.SaveChangesAsync();
-            }
-            else
-            {
-                throw new KeyNotFoundException("Employee not found");
-            }
-        }
-
-        public async Task<IEnumerable<Employee>> GetAllAsync()
-        {
-            return await _context.Employees.ToListAsync();
-        }
-
-
-
-        public async Task<Employee> GetByIdAsync(int id)
-        {
-            var employee = await _context.Employees.FindAsync(id);
-            if (employee == null)
-            {
-                throw new KeyNotFoundException("Employee not found");
-            }
-            return employee;
-        }
-
         public async Task<Employee> UpdateAsync(Employee entity)
         {
             var updateEmployee = await _context.Employees.AsNoTracking().FirstOrDefaultAsync(x => x.Id == entity.Id);
@@ -74,6 +42,35 @@ namespace Payroll.Infrastructure.Repositories
                 throw new KeyNotFoundException("Employee not found");
             }
         }
+        public async Task DeleteAsync(Guid id)
+        {
+            var employee = await _context.Employees.FindAsync(id);
+            if (employee != null)
+            {
+                _context.Employees.Remove(employee);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                throw new KeyNotFoundException("Employee not found");
+            }
+        }
+
+        public async Task<IEnumerable<Employee>> GetAllAsync()
+        {
+            return await _context.Employees.ToListAsync();
+        }
+
+        public async Task<Employee> GetByIdAsync(Guid id)
+        {
+            var employee = await _context.Employees.FindAsync(id);
+            if (employee == null)
+            {
+                throw new KeyNotFoundException("Employee not found");
+            }
+            return employee;
+        }
+
     }
 
 }

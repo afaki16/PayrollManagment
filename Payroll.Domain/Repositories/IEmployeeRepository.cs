@@ -9,5 +9,7 @@ namespace Payroll.Domain.Repositories
 {
     public interface IEmployeeRepository : IRepository<Employee>
     {
+        Task DeleteAsync(Guid id);
+        Task<Employee> GetByIdAsync(Guid id);
     }
 }

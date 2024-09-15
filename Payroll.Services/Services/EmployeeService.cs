@@ -35,7 +35,7 @@ namespace Payroll.Services.Services
             return result;
         }
 
-        public async Task DeleteEmployeeAsync(int id)
+        public async Task DeleteEmployeeAsync(Guid id)
         {
             await _employeeRepository.DeleteAsync(id);
         }
@@ -45,7 +45,7 @@ namespace Payroll.Services.Services
             return await _employeeRepository.GetAllAsync();
         }
         
-        public async Task<Employee> GetEmployeeByIdAsync(int id)
+        public async Task<Employee> GetEmployeeByIdAsync(Guid id)
         {
             return await _employeeRepository.GetByIdAsync(id);
         }

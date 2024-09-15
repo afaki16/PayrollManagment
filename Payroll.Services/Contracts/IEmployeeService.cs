@@ -11,9 +11,9 @@ namespace Payroll.Services.Contracts
     public interface IEmployeeService
     {
         Task<IEnumerable<Employee>> GetAllEmployeesAsync();
-        Task<Employee> GetEmployeeByIdAsync(int id);
+        Task<Employee> GetEmployeeByIdAsync(Guid id);
         Task<Employee> AddEmployeeAsync(CreateEmployeeDto employee);
         Task<Employee> UpdateEmployeeAsync(UpdateEmployeeDto employee);
-        Task DeleteEmployeeAsync(int id);
+        Task DeleteEmployeeAsync(Guid id);
     }
 }
